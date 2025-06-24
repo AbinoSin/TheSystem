@@ -2,94 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Catch the Box Game</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        background: #f0f0f0;
-        margin: 0;
-        padding: 0;
-      }
-      #gameArea {
-        width: 500px;
-        height: 500px;
-        margin: 50px auto;
-        border: 2px solid #333;
-        position: relative;
-        background: #fff;
-      }
-      #box {
-        width: 50px;
-        height: 50px;
-        background: red;
-        position: absolute;
-        cursor: pointer;
-      }
-      #scoreBoard {
-        font-size: 24px;
-        margin-bottom: 10px;
-      }
-    </style>
+    <title>Day of Year</title>
   </head>
   <body>
-    <h1>Catch the Box!</h1>
-    <div id="scoreBoard">
-      <div>Score: <span id="score">0</span></div>
-      <div>High Score: <span id="highScore">0</span></div>
-      <div>Time Left: <span id="timeLeft">60</span>s</div>
-    </div>
-    <div id="gameArea">
-      <div id="box"></div>
-    </div>
+    <h1>Day of Year: <span id="dayOfYear"></span></h1>
 
-    <script>
-      const box = document.getElementById("box");
-      const gameArea = document.getElementById("gameArea");
-      const scoreDisplay = document.getElementById("score");
-      const highScoreDisplay = document.getElementById("highScore");
-      const timeLeftDisplay = document.getElementById("timeLeft");
-      let score = 0;
-      let highScore = 0;
-      let timeLeft = 60;
-      let timer;
-
-      function moveBox() {
-        const maxX = gameArea.clientWidth - box.clientWidth;
-        const maxY = gameArea.clientHeight - box.clientHeight;
-        const randomX = Math.floor(Math.random() * maxX);
-        const randomY = Math.floor(Math.random() * maxY);
-        box.style.left = randomX + "px";
-        box.style.top = randomY + "px";
-      }
-
-      box.addEventListener("click", () => {
-        score++;
-        scoreDisplay.textContent = score;
-        moveBox();
-      });
-
-      function startGame() {
-        score = 0;
-        timeLeft = 60;
-        scoreDisplay.textContent = score;
-        timeLeftDisplay.textContent = timeLeft;
-        moveBox();
-        timer = setInterval(() => {
-          timeLeft--;
-          timeLeftDisplay.textContent = timeLeft;
-          if (timeLeft <= 0) {
-            clearInterval(timer);
-            if (score > highScore) {
-              highScore = score;
-              highScoreDisplay.textContent = highScore;
-            }
-            alert(`Time's up! Your score: ${score}`);
-          }
-        }, 1000);
-      }
-
-      startGame();
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/dayOfYear.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
